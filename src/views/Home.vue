@@ -1,18 +1,62 @@
+<!-- 定義父組件 -->
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <nav-header></nav-header>
+    <nav-main></nav-main>
+    <nav-footer></nav-footer>
   </div>
+
+  <!-- <div @click="clickNum">
+    {{ num }}
+  </div>
+  <div @click="clickNum1(1000)">
+    {{ num1 }}
+  </div> -->
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import navHeader from "@/components/navHeader/NavHeader";
+import navMain from "@/components/navMain/NavMain";
+import navFooter from "@/components/navFooter/NavFooter";
 
-export default {
-  name: 'Home',
+// 定義組件
+import { defineComponent, ref, reactive, toRefs } from "vue";
+
+export default defineComponent({
+  name: "Home",
   components: {
-    HelloWorld
-  }
-}
+    navHeader,
+    navMain,
+    navFooter,
+  },
+  setup(props, ctx) {
+    // let num1 = ref(11);
+    // let data = reactive({
+    //   num: 10,
+    //   name: "dale",
+    //   age: 20,
+    //   obj: {
+    //     price: 20,
+    //   },
+    //   arr: ["a", "b", "c", "d"],
+    // });
+
+    // let clickNum = () => {
+    //   alert("點擊了num");
+    // };
+
+    // let clickNum1 = (val) => {
+    //   alert(val);
+    // };
+
+    return {
+      // ...toRefs(data),
+      // num1,
+      // clickNum,
+      // clickNum1,
+    };
+  },
+});
 </script>
+
+<style lang="scss" scoped></style>
