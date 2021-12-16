@@ -1,17 +1,38 @@
 import { createStore } from 'vuex'
 
 export default createStore({
-  //state 代表定義所需要的狀態 例如定義一個name= dale ,定義後,這個內容在每個組件當中就都可以去使用
+  //state 代表定義所需要的狀態 
   state: {
-    name: 'dale'
+    list : [
+      {
+        title: "吃飯",
+        complete: false,
+      },
+      {
+        title: "睡覺",
+        complete: false,
+      },
+      {
+        title: "敲代碼",
+        complete: true,
+      },
+    ],
   },
-  //mutations 是用來同步修改status ,都是方法
-  //傳遞兩個參數,第一個參數為state ,第二個參數是需要修改的值
-  //payload 是可選參數,如果有不需要修改的值可以不傳
+  //mutations 是用來同步修改status 
   mutations: {
-    setName(state,payload){
-      state.name = payload   //傳入payload,忽略state
-      state.name.slice(0,1)  //調用方法傳值
+    //添加任務
+    addTodo(state,payload){
+      state.list.push(payload)
+    },
+    //刪除任務 splice(下標,個數)
+    delTodo(state,payload){
+      state.list.splice(payload,1)
+    },
+    //清除已完成
+    clear(state,payload){
+      //把過濾後的arr傳近來
+      state.list = payload
+
     }
   },
   //actions 為異步提交mutations ,他無法直接修改status ,如果state需要異步修改,則需要定一個action

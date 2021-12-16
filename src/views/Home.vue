@@ -4,14 +4,10 @@
     <nav-header></nav-header>
     <nav-main></nav-main>
     <nav-footer></nav-footer>
+    <div>
+      {{ list }}
+    </div>
   </div>
-
-  <!-- <div @click="clickNum">
-    {{ num }}
-  </div>
-  <div @click="clickNum1(1000)">
-    {{ num1 }}
-  </div> -->
 </template>
 
 <script>
@@ -20,7 +16,8 @@ import navMain from "@/components/navMain/NavMain";
 import navFooter from "@/components/navFooter/NavFooter";
 
 // 定義組件
-import { defineComponent, ref, reactive, toRefs } from "vue";
+import { defineComponent, ref, computed} from "vue";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "Home",
@@ -30,30 +27,12 @@ export default defineComponent({
     navFooter,
   },
   setup(props, ctx) {
-    // let num1 = ref(11);
-    // let data = reactive({
-    //   num: 10,
-    //   name: "dale",
-    //   age: 20,
-    //   obj: {
-    //     price: 20,
-    //   },
-    //   arr: ["a", "b", "c", "d"],
-    // });
-
-    // let clickNum = () => {
-    //   alert("點擊了num");
-    // };
-
-    // let clickNum1 = (val) => {
-    //   alert(val);
-    // };
-
+    let store = useStore()
+    let list = computed(() =>{
+      return store.state.list
+    })
     return {
-      // ...toRefs(data),
-      // num1,
-      // clickNum,
-      // clickNum1,
+      list,
     };
   },
 });

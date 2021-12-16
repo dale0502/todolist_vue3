@@ -39,3 +39,4 @@ export default defineComponent({
     margin-left: 10px;
   }
 }
+</style>
