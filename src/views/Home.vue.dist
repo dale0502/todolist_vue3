@@ -1,0 +1,63 @@
+<!-- 定義父組件 -->
+<template>
+  <div>
+    <nav-header></nav-header>
+    <nav-main></nav-main>
+    <nav-footer></nav-footer>
+    <!-- <div>
+      {{ list }}
+    </div> -->
+    <div>{{ num }} ---- {{ name }} ---- {{ obj }}</div>
+  </div>
+</template>
+
+<script>
+import navHeader from "@/components/navHeader/NavHeader";
+import navMain from "@/components/navMain/NavMain";
+import navFooter from "@/components/navFooter/NavFooter";
+
+// 定義組件
+import { defineComponent, ref, computed, onMounted, onUnmounted } from "vue";
+import { useStore } from "vuex";
+import { useRoute, useRouter } from "vue-router";
+
+export default defineComponent({
+  name: "Home",
+  components: {
+    navHeader,
+    navMain,
+    navFooter,
+  },
+  setup(props, ctx) {
+    let store = useStore();
+    let route = useRoute();
+    let num = ref(null);
+    let name = ref("");
+    let obj = ref({});
+
+    onMounted(() => {
+      num.value = route.params.num * 1;
+      name.value = route.params.name;
+      obj.value = JSON.parse(route.params.obj);
+    });
+
+    onUnmounted(() => {
+      //組件卸載時的生命週期
+      //清除定時器,清除閉包函數
+      console.log("onUnmounted");
+    });
+
+    let list = computed(() => {
+      return store.state.list;
+    });
+    return {
+      list,
+      num,
+      name,
+      obj,
+    };
+  },
+});
+</script>
+
+<style lang="scss" scoped></style>

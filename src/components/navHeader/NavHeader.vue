@@ -14,11 +14,14 @@
 import { defineComponent, ref } from "vue";
 export default defineComponent({
   name: "navHeader",
-  setup(props) {
+  setup(props, ctx) {
     let value = ref("");
     //點擊鍵盤enter確認
     let enter = () => {
-      alert(value.value);
+      //把輸入框內容傳遞給父組件
+      ctx.emit("add", value.value);
+      //清空輸入框
+      value.value = "";
     };
     return {
       value,

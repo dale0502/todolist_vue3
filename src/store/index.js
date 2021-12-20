@@ -32,7 +32,6 @@ export default createStore({
     clear(state,payload){
       //把過濾後的arr傳近來
       state.list = payload
-
     }
   },
   //actions 為異步提交mutations ,他無法直接修改status ,如果state需要異步修改,則需要定一個action
@@ -50,3 +49,4 @@ export default createStore({
   modules: {
   }
 })
+

@@ -1,11 +1,16 @@
  <!-- 定義子組件 -->
 <template>
-  <div v-for="(item, index) in list" :key="index">
-    <div class="item">
-      <input type="checkbox" v-model="item.complete" />
-      {{ item.title }}
-      <button class="del" @click="del(item, index)">刪除</button>
+  <div>
+    <div v-if="list.length > 0">
+      <div v-for="(item, index) in list" :key="index">
+        <div class="item">
+          <input type="checkbox" v-model="item.complete" />
+          {{ item.title }}
+          <button class="del" @click="del(item, index)">刪除</button>
+        </div>
+      </div>
     </div>
+    <div v-else>暫無任務</div>
   </div>
 </template>
 
@@ -14,29 +19,22 @@
 import { defineComponent, ref } from "vue";
 export default defineComponent({
   name: "navMain",
-  setup(props) {
-    let list = ref([
-      {
-        title: "吃飯",
-        complete: false,
-      },
-      {
-        title: "睡覺",
-        complete: false,
-      },
-      {
-        title: "敲代碼",
-        complete: false,
-      },
-    ]);
+  props: {
+    list: {
+      type: Array,
+      required: true,
+    },
+  },
+  emits: ["del"],
+  setup(props, ctx) {
     //刪除任務
     let del = (item, index) => {
-      console.log(item);
-      console.log(index);
+      ctx.emit("del", index);
+      // console.log(item);
+      // console.log(index);
     };
 
     return {
-      list,
       del,
     };
   },
